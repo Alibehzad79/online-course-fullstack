@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from django.contrib.auth.hashers import make_password
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your views here.
 
@@ -41,3 +42,13 @@ def user_profile_view(request):
     user = request.user
     serializer = UserProfileSerializer(user, many=False)
     return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def logout(request):
+    try:
+        refresh_token = request.data['refresh_token']
+        token = RefreshToken(refresh_token)
+        token.blacklist()
+        return Response(status=status.HTTP_205_RESET_CONTENT)
+    except Exception as error:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

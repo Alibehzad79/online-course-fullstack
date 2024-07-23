@@ -42,15 +42,32 @@ INSTALLED_APPS = [
     # django rest framework
     "rest_framework",
     "rest_framework_simplejwt",
+    'rest_framework_simplejwt.token_blacklist',
+    "corsheaders",
     # my apps
     "accounts_app.apps.AccountsAppConfig",
 ]
+
+
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+# ]
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -143,8 +160,8 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60 * 60 * 60),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=2 * 24 * 4),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
