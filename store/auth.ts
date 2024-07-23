@@ -4,7 +4,6 @@ export const useAuthStore = defineStore('auth', {
     state: () => (
         {
             isAuthenticated: false,
-            error: '',
             loading: false,
         }
     ),
@@ -29,10 +28,6 @@ export const useAuthStore = defineStore('auth', {
                 token.value = data?.value?.access
                 refreshToken.value = data?.value?.refresh
                 this.isAuthenticated = true
-            }
-
-            if (error.value) {
-                console.log(error.value)
             }
         },
 

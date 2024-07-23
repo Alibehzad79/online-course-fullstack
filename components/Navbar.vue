@@ -11,7 +11,7 @@ const { logUserOut } = useAuthStore()
 
 const goLogout = () => {
     logUserOut()
-    router.push('/')
+    router.push('/accounts/login')
 }
 
 const isOpen = ref(false)
@@ -19,13 +19,22 @@ const isOpen = ref(false)
 const links = [{
     label: 'Home',
     icon: 'i-heroicons-home',
-    to: '/'
+    to: '/',
+    click: () => {
+        isOpen.value = false
+    }
 }, {
     label: 'Courses',
     icon: 'i-heroicons-chart-bar',
+    click: () => {
+        isOpen.value = false
+    }
 }, {
     label: 'About',
     icon: 'i-heroicons-command-line',
+    click: () => {
+        isOpen.value = false
+    }
 }]
 
 const authLinks = [
@@ -33,11 +42,17 @@ const authLinks = [
         label: "Login",
         icon: "i-heroicons-key",
         labelClass: "text-primary",
-        to: "/accounts/login"
+        to: "/accounts/login",
+        click: () => {
+            isOpen.value = false
+        }
     },
     {
         label: "Register",
         icon: "i-heroicons-users",
+        click: () => {
+            isOpen.value = false
+        }
     }
 ]
 
@@ -47,14 +62,20 @@ const userLinks = [
         avatar: {
             src: 'https://avatars.githubusercontent.com/u/739984?v=4'
         },
-        to: "/accounts/user"
+        to: "/accounts/user",
+        click: () => {
+            isOpen.value = false
+        }
     },
     {
         label: 'Logout',
         icon: "i-heroicons-x-mark",
         labelClass: "text-red-600",
         iconClass: "text-red-600",
-        click: goLogout
+        click: () => {
+            isOpen.value = false
+            goLogout()
+        }
     },
 
 ]
