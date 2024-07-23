@@ -1,6 +1,19 @@
 <script setup>
+import { storeToRefs } from "pinia"
+import { useAuthStore } from "~/store/auth";
 
-const isAuthenticated = ref(true)
+
+const { isAuthenticated } = storeToRefs(useAuthStore())
+const router = useRouter()
+
+const { logUserOut } = useAuthStore()
+
+
+const goLogout = () => {
+    logUserOut()
+    router.push('/')
+}
+
 const isOpen = ref(false)
 
 const links = [{
@@ -19,7 +32,8 @@ const authLinks = [
     {
         label: "Login",
         icon: "i-heroicons-key",
-        labelClass: "text-primary"
+        labelClass: "text-primary",
+        to: "/accounts/login"
     },
     {
         label: "Register",
@@ -33,15 +47,18 @@ const userLinks = [
         avatar: {
             src: 'https://avatars.githubusercontent.com/u/739984?v=4'
         },
+        to: "/accounts/user"
     },
     {
         label: 'Logout',
         icon: "i-heroicons-x-mark",
         labelClass: "text-red-600",
         iconClass: "text-red-600",
+        click: goLogout
     },
 
 ]
+
 </script>
 
 <template>
@@ -71,7 +88,6 @@ const userLinks = [
                     <template #header>
                         <UButton color="gray" variant="ghost" size="sm" icon="i-heroicons-x-mark-20-solid"
                             class="flex sm:hidden absolute end-5 top-5 z-10" square padded @click="isOpen = false" />
-                        <Placeholder class="h-8" />
                         <h6 class="font-bold">Menu</h6>
                     </template>
                     <div class="flex gap-2 mb-5">
@@ -80,8 +96,8 @@ const userLinks = [
                     </div>
                     <div class="flex flex-col gap-5">
                         <UVerticalNavigation :links="links" />
-                        <UVerticalNavigation :links="authLinks" v-if="!isAuthenticated" />
                         <UVerticalNavigation :links="userLinks" v-if="isAuthenticated" />
+                        <UVerticalNavigation :links="authLinks" v-if="!isAuthenticated" />
                     </div>
                 </UCard>
             </USlideover>

@@ -1,4 +1,5 @@
 <script setup>
+
 useSeoMeta({
     title: "Home | Online Course"
 })
