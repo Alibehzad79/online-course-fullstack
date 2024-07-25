@@ -4,11 +4,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from accounts_app.serializers import RegisterSerializer, UserProfileSerializer
 from django.contrib.auth import get_user_model
-from rest_framework.decorators import api_view, permission_classes, renderer_classes
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.renderers  import BrowsableAPIRenderer, TemplateHTMLRenderer
 
 # Create your views here.
 
