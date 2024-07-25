@@ -16,10 +16,7 @@ useSeoMeta({
 })
 
 const router = useRouter()
-
-const showPassword = ref(false)
 const btnLoading = ref(false)
-const toast = useToast()
 const user = ref({
     email: "",
     password: ""
@@ -37,23 +34,29 @@ const doLogin = async () => {
 }
 
 
+const selected = ref(false)
+
+
 </script>
 
 <template>
     <div>
         <div class="container mx-auto p-5 mt-5 flex gap-5 items-center">
-            <NuxtImg src="/login.png" class="hidden md:flex md:w-1/2" />
+            <NuxtImg src="/login.png" :loading="imageLoading" class="hidden md:flex md:w-1/2" />
             <form @submit.prevent="doLogin" class="flex flex-col gap-5 w-full md:w-1/2">
                 <h1 class="text-xl md:text-4xl font-bold">Login</h1>
-                <UInput v-model="user.email" type="email" required placeholder="Email" icon="i-heroicons-envelope" />
-                <UInput v-model="user.password" :type="showPassword ? 'text' : 'password'" required
+                <UInput v-model="user.email" type="email" required placeholder="Email" size="xl"
+                    icon="i-heroicons-envelope" />
+                <UInput v-model="user.password" :type="selected ? 'text' : 'password'" size="xl" required
                     placeholder="Password" icon="i-heroicons-key">
-                    <template #leading>
-                        <UIcon :name="showPassword ? 'i-heroicons-eye' : 'i-heroicons-eye-slash'"
-                            @click="showPassword = !showPassword" />
-                    </template>
                 </UInput>
-                <UButton label="Login" type="submit" :loading="btnLoading" class="justify-center" />
+                <div class="flex gap-1 items-center justify-between">
+                    <div class="flex items-center gap-1">
+                        <UToggle v-model="selected" /><span>Show Password</span>
+                    </div>
+                    <NuxtLink to="/accounts/forget-password" class="text-primary">Forget Password?</NuxtLink>
+                </div>
+                <UButton label="Login" type="submit" :loading="btnLoading" size="xl" class="justify-center" />
             </form>
         </div>
     </div>

@@ -8,13 +8,17 @@ export default defineNuxtRouteMiddleware((to, from) => {
         isAuthenticated.value = true
     }
 
-    if (token.value && to?.name === "login") {
+    if (token.value && to?.name === "login" || token.value && to?.name === "register") {
         return navigateTo('/');
     }
 
     if (!token.value && to?.name !== "login") {
-        abortNavigation()
-        return navigateTo("/accounts/login")
+        if (!token.value && to?.name === "register") {
+            return
+        } else {
+            abortNavigation()
+            return navigateTo("/accounts/login")
+        }
     }
 
 })

@@ -16,6 +16,12 @@ const goLogout = () => {
 
 const isOpen = ref(false)
 
+const colorMode = useColorMode()
+const changeTheme = () => {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
+
+
 const links = [{
     label: 'Home',
     icon: 'i-heroicons-home',
@@ -41,7 +47,6 @@ const authLinks = [
     {
         label: "Login",
         icon: "i-heroicons-key",
-        labelClass: "text-primary",
         to: "/accounts/login",
         click: () => {
             isOpen.value = false
@@ -50,10 +55,11 @@ const authLinks = [
     {
         label: "Register",
         icon: "i-heroicons-users",
+        to: "/accounts/register",
         click: () => {
             isOpen.value = false
         }
-    }
+    },
 ]
 
 const userLinks = [
@@ -83,22 +89,24 @@ const userLinks = [
 </script>
 
 <template>
-    <div>
-        <div class="container mx-auto mt-5 flex justify-between hidden md:flex">
+    <div class="sticky top-0">
+        <div class="container mx-auto mt-5 flex justify-between hidden md:flex items-center shadow-xl p-5 rounded-xl z-50 bg-white dark:bg-zinc-800">
             <NuxtLink to="/">
-                <NuxtImg src="/logo.png" class="me-5" style="max-width: 120px; max-height: 120px;" />
+                <NuxtImg src="/logo.png" class="me-5 dark:bg-white rounded-md" style="max-width: 120px; max-height: 120px;" />
             </NuxtLink>
-            <UHorizontalNavigation :links="links" class="border-b border-gray-200 dark:border-gray-800 md:w-3/4" />
+            <UHorizontalNavigation :links="links" class="dark:border-gray-800 md:w-3/4" />
             <UHorizontalNavigation v-if="!isAuthenticated" :links="authLinks"
-                class="border-b border-gray-200 dark:border-gray-800 md:w-1/4" />
+                class="dark:border-gray-800 md:w-1/4" />
             <UHorizontalNavigation v-if="isAuthenticated" :links="userLinks"
-                class="border-b border-gray-200 dark:border-gray-800 md:w-1/4" />
+                class="dark:border-gray-800 md:w-1/4" />
+            <UButton :icon="colorMode.value === 'dark' ? 'i-heroicons-sun' : 'i-heroicons-moon'" @click="changeTheme" />
         </div>
         <div class="md:hidden flex justify-between mt-2 p-2">
             <NuxtLink to="/">
                 <NuxtImg src="/logo.png" class="me-5" style="max-width: 120px; max-height: 120px;" />
             </NuxtLink>
             <div class="flex gap-2 items-center">
+                <UButton :icon="colorMode.value === 'dark' ? 'i-heroicons-sun' : 'i-heroicons-moon'" @click="changeTheme" />
                 <UButton icon="i-heroicons-bars-3" label="Menu" @click="isOpen = true" />
             </div>
         </div>

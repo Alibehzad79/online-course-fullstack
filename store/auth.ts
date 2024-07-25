@@ -9,7 +9,6 @@ export const useAuthStore = defineStore('auth', {
     ),
     actions: {
         async authenticationUser(email: String, password: String) {
-            console.log("request from store")
             const { data, pending, error } = await useFetch('http://localhost:8000/api/accounts/token/',
                 {
                     method: "post",
