@@ -57,6 +57,7 @@ const selected = ref(false)
                     <NuxtLink to="/accounts/forget-password" class="text-primary">Forget Password?</NuxtLink>
                 </div>
                 <UButton label="Login" type="submit" :loading="btnLoading" size="xl" class="justify-center" />
+                <UAlert :title="error.statusCode === 401 ? 'Invalid Email or Password':'Error '+error.statusCode" v-if="error" color="rose" />
             </form>
         </div>
     </div>

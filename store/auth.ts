@@ -5,6 +5,7 @@ export const useAuthStore = defineStore('auth', {
         {
             isAuthenticated: false,
             loading: false,
+            error: ''
         }
     ),
     actions: {
@@ -20,7 +21,7 @@ export const useAuthStore = defineStore('auth', {
                 }
             )
             this.loading = pending.value
-
+            this.error = error.value
             if (data.value) {
                 const token = useCookie("token")
                 const refreshToken = useCookie("refresh_token")
