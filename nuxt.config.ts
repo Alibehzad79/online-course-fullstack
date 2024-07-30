@@ -12,5 +12,23 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.css',
   ],
-  ssr: true
+  ssr: true,
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        // default values
+        componentName: 'NuxtLink',
+        externalRelAttribute: 'noopener noreferrer',
+        activeClass: 'router-link-active',
+        exactActiveClass: 'router-link-exact-active',
+        prefetchedClass: undefined, // can be any valid string class name
+        trailingSlash: undefined // can be 'append' or 'remove'
+      }
+    }
+  },
+  app: {
+    pageTransition: {
+      name: 'slide-right', mode: 'out-in'
+    }
+  },
 })

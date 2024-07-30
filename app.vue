@@ -1,12 +1,15 @@
 <script setup>
 const isLoading = ref(true)
+const loadValue = ref(0)
 const nuxtapp = useNuxtApp()
 
 nuxtapp.hook('page:loading:start', () => {
   isLoading.value = true
+  loadValue.value = 70
 })
 nuxtapp.hook('page:loading:end', () => {
   isLoading.value = false
+  loadValue.value = 100
 })
 
 </script>
@@ -14,7 +17,7 @@ nuxtapp.hook('page:loading:end', () => {
 <template>
   <div>
     <div v-if="isLoading">
-      <UProgress animation="carousel" size="sm" />
+      <UProgress size="sm" :value="loadValue" />
     </div>
     <NuxtLayout>
       <NuxtPage />

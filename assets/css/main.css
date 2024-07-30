@@ -3,10 +3,33 @@
 @tailwind utilities;
 
 .router-link-active, .router-link-exact-active {
-    border-bottom: 0.1rem #f97316 solid;
-    color: #f97316;
+    @apply bg-primary-100 rounded-lg text-primary px-2 py-1 dark:bg-primary-500 dark:text-white
 }
 
 .logo {
     border: none !important;
+    background-color: transparent !important;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 0.2s;
+}
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translate(50px, 0);
+}
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translate(-50px, 0);
+}
+.slide-right-enter-from {
+  opacity: 0;
+  transform: translate(-50px, 0);
+}
+.slide-right-leave-to {
+  opacity: 0;
+  transform: translate(50px, 0);
 }

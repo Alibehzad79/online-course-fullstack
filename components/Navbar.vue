@@ -29,6 +29,8 @@ const changeTheme = () => {
     colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 
+const search = ref(null)
+
 </script>
 
 <template>
@@ -79,8 +81,11 @@ const changeTheme = () => {
                     </div>
                 </div>
                 <div class="col-6 flex items-center justify-between gap-5">
-                    <UInput color="gray" size="xl" variant="outline" placeholder="Search..."
-                        icon="i-heroicons-magnifying-glass-20-solid" :trailing="true" />
+                    <UInput color="gray" size="xl" variant="outline" v-model="search" placeholder="Search..." :trailing="true">
+                        <template #trailing>
+                            <UKbd v-if="search != ''">ENTER</UKbd>
+                        </template>
+                    </UInput>
                     <span class="h-10 w-px dark:bg-gray-600 bg-gray-200"></span>
                     <div v-if="isAuthenticated" class="flex items-center gap-3">
                         <div class="flex gap-3 items-center">
@@ -94,16 +99,14 @@ const changeTheme = () => {
                             @click="goLogout" />
                     </div>
                     <div v-if="!isAuthenticated" class="flex items-center gap-3">
-                        <NuxtLink to="/accounts/login">
-                            <UButton label="Login" size="xl" variant="outline" />
-                        </NuxtLink>
-                        <NuxtLink to="/accounts/register">
-                            <UButton label="Register" size="xl" />
-                        </NuxtLink>
+                        <UButton label="Login" size="xl" variant="outline" @click="router.push('/accounts/login')" />
+                        <UButton label="Register" size="xl" @click="router.push('/accounts/register')" />
                     </div>
-                    <UButton size="xl" variant="soft"
-                        :icon="colorMode.value === 'dark' ? 'i-heroicons-sun' : 'i-heroicons-moon'"
-                        @click="changeTheme" />
+                    <UTooltip text="Change Theme" :popper="{ arrow: true }">
+                        <UButton size="xl" variant="soft"
+                            :icon="colorMode.value === 'dark' ? 'i-heroicons-sun' : 'i-heroicons-moon'"
+                            @click="changeTheme" />
+                    </UTooltip>
                 </div>
             </div>
             <div v-if="isMobile" class="flex items-center justify-between md:hidden">
@@ -143,7 +146,8 @@ const changeTheme = () => {
                                         <span class="text-gray-400">Web Designer</span>
                                     </div>
                                 </div>
-                                <UButton color="rose" label="Logout" @click="goLogout" icon="i-heroicons-x-mark-20-solid" />
+                                <UButton color="rose" label="Logout" @click="goLogout"
+                                    icon="i-heroicons-x-mark-20-solid" />
                             </div>
                             <div v-if="!isAuthenticated" class="flex items-center gap-3 mt-5">
                                 <NuxtLink to="/accounts/login" @click="isOpen = false">
