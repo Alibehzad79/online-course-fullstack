@@ -17,6 +17,7 @@ const { logUserOut } = useAuthStore()
 
 
 const goLogout = () => {
+    isOpen.value = false
     logUserOut()
     router.push('/accounts/login')
 }
@@ -82,11 +83,15 @@ const changeTheme = () => {
                         icon="i-heroicons-magnifying-glass-20-solid" :trailing="true" />
                     <span class="h-10 w-px dark:bg-gray-600 bg-gray-200"></span>
                     <div v-if="isAuthenticated" class="flex items-center gap-3">
-                        <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="user avatar" />
-                        <div class="flex flex-col items-start justify-between">
-                            <span class="font-bold">User Name</span>
-                            <span class="text-gray-400">Web Designer</span>
+                        <div class="flex gap-3 items-center">
+                            <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" alt="user avatar" />
+                            <div class="flex flex-col items-start justify-between">
+                                <span class="font-bold">User Name</span>
+                                <span class="text-gray-400">Web Designer</span>
+                            </div>
                         </div>
+                        <UButton label="Logout" size="xl" color="rose" icon="i-heroicons-x-mark-20-solid"
+                            @click="goLogout" />
                     </div>
                     <div v-if="!isAuthenticated" class="flex items-center gap-3">
                         <NuxtLink to="/accounts/login">
@@ -138,7 +143,7 @@ const changeTheme = () => {
                                         <span class="text-gray-400">Web Designer</span>
                                     </div>
                                 </div>
-                                <UButton color="rose" label="Logout" icon="i-heroicons-x-mark-20-solid" />
+                                <UButton color="rose" label="Logout" @click="goLogout" icon="i-heroicons-x-mark-20-solid" />
                             </div>
                             <div v-if="!isAuthenticated" class="flex items-center gap-3 mt-5">
                                 <NuxtLink to="/accounts/login" @click="isOpen = false">
