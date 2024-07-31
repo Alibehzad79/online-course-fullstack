@@ -8,8 +8,10 @@ nuxtapp.hook('page:loading:start', () => {
   loadValue.value = 70
 })
 nuxtapp.hook('page:loading:end', () => {
-  isLoading.value = false
   loadValue.value = 100
+  setTimeout(() => {
+    isLoading.value = false
+  }, 500);
 })
 
 </script>
