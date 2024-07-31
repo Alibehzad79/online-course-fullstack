@@ -8,6 +8,11 @@ useSeoMeta({
     title: "Register Page"
 })
 
+const load = ref(true)
+tryOnMounted(() => {
+    load.value = false
+})
+
 const passwordError = ref(false)
 const exitsUserError = ref(false)
 const btnLoading = ref(false)
@@ -48,13 +53,29 @@ const doRegister = async () => {
 }
 const selected = ref(false)
 
+const imageUrl = '/register.png'
+const { isLoading } = useImage({ src: imageUrl })
 
 </script>
 
 <template>
     <div>
-        <div class="container mx-auto p-5 mt-5 flex gap-5 items-center">
-            <NuxtImg src="/register.png" :loading="imageLoading" class="hidden md:flex md:w-1/2" />
+        <div v-if="load" class="container mx-auto p-5 mt-5 flex gap-5 items-center">
+            <MySkeleton v-if="load" class="hidden md:flex md:w-1/2 h-96" />
+            <div class="flex flex-col gap-5 w-full md:w-1/2">
+                <MySkeleton class="h-4 w-52" />
+                <MySkeleton class="h-10 w-full" />
+                <MySkeleton class="h-10 w-full" />
+                <MySkeleton class="h-10 w-full" />
+                <MySkeleton class="h-10 w-full" />
+                <MySkeleton class="h-10 w-full" />
+                <MySkeleton class="h-4 w-20" />
+                <MySkeleton class="h-10 w-full" />
+            </div>
+        </div>
+        <div class="container mx-auto p-5 mt-5 flex gap-5 items-center" v-if="!load">
+            <MySkeleton v-if="isLoading" class="hidden md:flex md:w-1/2 h-96" />
+            <NuxtImg :src="imageUrl" v-if="!isLoading" class="hidden md:flex md:w-1/2" />
             <form @submit.prevent="doRegister" class="flex flex-col gap-5 w-full md:w-1/2">
                 <h1 class="text-xl md:text-4xl font-bold">Register</h1>
 

@@ -2,8 +2,17 @@
 import { useImage } from '@vueuse/core'
 import { storeToRefs } from "pinia"
 import { useAuthStore } from "~/store/auth";
+
+const load = ref(true)
+tryOnMounted(() => {
+    load.value = false
+})
+
+
 const { authenticationUser } = useAuthStore()
 const { isAuthenticated, loading, error } = storeToRefs(useAuthStore())
+
+
 
 
 definePageMeta({
@@ -43,7 +52,20 @@ const { isLoading } = useImage({ src: imageUrl })
 
 <template>
     <div>
-        <div class="container mx-auto p-5 mt-5 flex gap-5 items-center">
+        <div v-if="load" class="container mx-auto p-5 mt-5 flex gap-5 items-center">
+            <MySkeleton v-if="load" class="hidden md:flex md:w-1/2 h-96" />
+            <div class="flex flex-col gap-5 w-full md:w-1/2">
+                <MySkeleton class="h-4 w-52" />
+                <MySkeleton class="h-10 w-full" />
+                <MySkeleton class="h-10 w-full" />
+                <div class="flex items-center justify-between">
+                    <MySkeleton class="h-4 w-20" />
+                    <MySkeleton class="h-4 w-20" />
+                </div>
+                <MySkeleton class="h-10 w-full" />
+            </div>
+        </div>
+        <div class="container mx-auto p-5 mt-5 flex gap-5 items-center" v-if="!load">
             <MySkeleton v-if="isLoading" class="hidden md:flex md:w-1/2 h-96" />
             <NuxtImg :src="imageUrl" v-if="!isLoading" class="hidden md:flex md:w-1/2" />
             <form @submit.prevent="doLogin" class="flex flex-col gap-5 w-full md:w-1/2">

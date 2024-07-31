@@ -63,7 +63,10 @@ const search = ref(null)
         <div v-if="loadComponent && isMobile" class="mt-5 p-1">
             <div class="flex items-center space-x-4 justify-between">
                 <MySkeleton class="h-4 w-32" />
-                <MySkeleton class="h-10 w-10" />
+                <div class="flex gap-2 items-center">
+                    <MySkeleton class="h-10 w-10" />
+                    <MySkeleton class="h-10 w-10" />
+                </div>
             </div>
         </div>
         <div v-if="!loadComponent" class="mt-5">
@@ -81,7 +84,8 @@ const search = ref(null)
                     </div>
                 </div>
                 <div class="col-6 flex items-center justify-between gap-5">
-                    <UInput color="gray" size="xl" variant="outline" v-model="search" placeholder="Search..." :trailing="true">
+                    <UInput color="gray" size="xl" variant="outline" v-model="search" placeholder="Search..."
+                        :trailing="true">
                         <template #trailing>
                             <UKbd v-if="search != ''">ENTER</UKbd>
                         </template>
