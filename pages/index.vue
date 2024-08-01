@@ -10,8 +10,9 @@ const router = useRouter()
 
 <template>
     <div>
-        <UContainer class="mt-5">
+        <UContainer class="mt-5 flex flex-col gap-10">
             <Categories />
+            <Hero />
         </UContainer>
     </div>
 </template>

@@ -67,7 +67,7 @@ const { isLoading } = useImage({ src: imageUrl })
         </div>
         <div class="container mx-auto p-5 mt-5 flex gap-5 items-center" v-if="!load">
             <MySkeleton v-if="isLoading" class="hidden md:flex md:w-1/2 h-96" />
-            <NuxtImg :src="imageUrl" v-if="!isLoading" class="hidden md:flex md:w-1/2" />
+            <NuxtImg :src="imageUrl" v-if="!isLoading" class="hidden md:flex md:w-1/2 text-primary" />
             <form @submit.prevent="doLogin" class="flex flex-col gap-5 w-full md:w-1/2">
                 <h1 class="text-xl md:text-4xl font-bold">Login</h1>
                 <UInput v-model="user.email" type="email" required placeholder="Email" size="xl"
