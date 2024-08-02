@@ -6,6 +6,8 @@ tryOnMounted(() => {
     load.value = false
 })
 
+const {isDesktop, isMobile} = useDevice()
+
 const router = useRouter()
 
 const image = '/hero.jpg'
@@ -15,7 +17,7 @@ const { isLoading } = useImage({ src: image })
 
 <template>
     <div>
-        <div v-if="load" class="flex items-center justify-between">
+        <div v-if="load && isDesktop" class="flex items-center justify-between">
             <div class="md:col-6 flex flex-col gap-10 w-full">
                 <div class="flex flex-col gap-2">
                     <MySkeleton class="h-4 w-40" />
@@ -24,6 +26,20 @@ const { isLoading } = useImage({ src: image })
                     <MySkeleton class="h-4 w-60" />
                 </div>
                 <MySkeleton class="h-10 w-32" />
+            </div>
+            <div class="md:col-6 w-full">
+                <MySkeleton class="h-96 w-full" />
+            </div>
+        </div>
+        <div v-if="load && isMobile" class="flex flex-col flex-col-reverse gap-5 items-center justify-between">
+            <div class="md:col-6 flex flex-col gap-10 w-full">
+                <div class="flex flex-col gap-2">
+                    <MySkeleton class="h-4 w-40" />
+                    <MySkeleton class="h-4 w-80" />
+                    <MySkeleton class="h-4 w-80" />
+                    <MySkeleton class="h-4 w-60" />
+                </div>
+                <MySkeleton class="h-10 w-full" />
             </div>
             <div class="md:col-6 w-full">
                 <MySkeleton class="h-96 w-full" />

@@ -88,7 +88,10 @@ const search = ref(null)
                         <UInput color="gray" size="xl" variant="outline" v-model="search" placeholder="Search..."
                             :trailing="true">
                             <template #trailing>
-                                <UKbd v-if="search != ''">ENTER</UKbd>
+                                <span class="i-heroicons-magnifying-glass text-2xl text-gray-400"
+                                    v-if="search === null || search === ''"></span>
+                                <UKbd class="text-gray-500 dark:text-gray-400 text-xs"
+                                    v-if="search !== null && search !== ''">ENTER</UKbd>
                             </template>
                         </UInput>
                         <span class="h-10 w-px dark:bg-gray-600 bg-gray-200"></span>

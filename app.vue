@@ -18,7 +18,7 @@ nuxtapp.hook('page:loading:end', () => {
 
 <template>
   <div>
-    <div v-if="isLoading">
+    <div v-if="isLoading" class="absolute top-0">
       <UProgress size="sm" :value="loadValue" />
     </div>
     <NuxtLayout>
