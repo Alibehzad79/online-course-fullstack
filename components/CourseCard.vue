@@ -29,7 +29,7 @@ const { isLoading } = useImage({ src: props.image })
             <div v-if="isLoading" class="items-center justify-center flex h-60">
                 <i class="i-heroicons-arrow-path animate-spin"></i>
             </div>
-            <NuxtImg src="https://img.freepik.com/free-vector/laptop-with-program-code-isometric-icon-software-development-programming-applications-dark-neon_39422-971.jpg" v-if="!isLoading" class="rounded-md" />
+            <NuxtImg :src="image" v-if="!isLoading" class="rounded-md" />
             <h6 class="line-clamp-1 font-bold">{{ title }}</h6>
             <div class="flex justify-between">
                 <span class="flex items-center"><i
