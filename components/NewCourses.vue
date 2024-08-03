@@ -50,31 +50,31 @@ const items = [
                             <div v-if="item.key === 'all'"
                                 class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
                                 <CourseCard v-for="x in 6" title="All lorem ipsum is good to use fake content for projects"
-                                    image="/image.png"
+                                    image="/course.jpg"
                                     lesson="20" students="162" rank="Beginner" rate="4" />
                             </div>
                             <div v-if="item.key === 'design'"
                                 class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
                                 <CourseCard v-for="x in 6" title="Desing lorem ipsum is good to use fake content for projects"
-                                    image="/image.png"
+                                    image="/course.jpg"
                                     lesson="20" students="80" rank="Beginner" rate="5" />
                             </div>
                             <div v-if="item.key === 'dev'"
                                 class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
                                 <CourseCard v-for="x in 6" title="Development lorem ipsum is good to use fake content for projects"
-                                    image="/image.png"
+                                    image="/course.jpg"
                                     lesson="20" students="90" rank="Beginner" rate="3" />
                             </div>
                             <div v-if="item.key === 'photo'"
                                 class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
                                 <CourseCard v-for="x in 6" title="Photography lorem ipsum is good to use fake content for projects"
-                                    image="/image.png"
+                                    image="/course.jpg"
                                     lesson="20" students="150" rank="Beginner" rate="4" />
                             </div>
                             <div v-if="item.key === 'music'"
                                 class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
                                 <CourseCard v-for="x in 6" title="Music lorem ipsum is good to use fake content for projects"
-                                    image="/image.png"
+                                    image="/course.jpg"
                                     lesson="20" students="162" rank="Beginner" rate="5" />
                             </div>
                         </template>
